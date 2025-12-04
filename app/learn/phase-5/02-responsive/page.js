@@ -4,12 +4,22 @@
 
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import DemoContainer from '../../../components/DemoContainer';
 import CodeBlock from '../../../components/CodeBlock';
 import Navigation from '../../../components/Navigation';
 
 export default function ResponsivePage() {
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    const updateWidth = () => setWindowWidth(window.innerWidth);
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
+
   const navigationItems = [
     { label: 'Phase 5 概览', href: '/learn/phase-5' },
     { label: '工具类基础', href: '/learn/phase-5/01-utilities' },
@@ -253,7 +263,7 @@ export default function ResponsivePage() {
               内边距和字体大小随屏幕增大
             </p>
             <p className="text-xs sm:text-sm md:text-base mt-2">
-              当前屏幕 ≥ {window.innerWidth}px
+              当前屏幕 ≥ {windowWidth}px
             </p>
           </div>
         </DemoContainer>

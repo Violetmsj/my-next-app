@@ -270,87 +270,87 @@ function ParentComponent() {
 // ✅ 状态逻辑清晰，易于理解
 // ❌ 深层嵌套时需要层层传递（"props drilling"）`;
 
-// contextPatternCode = `// 2. Context 模式 - 避免 props drilling
-import { createContext, useContext, useState } from 'react';
+const contextPatternCode = `// 2. Context 模式 - 避免 props drilling
+// import { createContext, useContext, useState } from 'react';
 
-// 创建 Context
-const UserContext = createContext();
-const ThemeContext = createContext();
+// // 创建 Context
+// const UserContext = createContext();
+// const ThemeContext = createContext();
 
-// Provider 组件
-function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
+// // Provider 组件
+// function UserProvider({ children }) {
+//   const [user, setUser] = useState(null);
 
-  return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
-    </UserContext.Provider>
-  );
-}
+//   return (
+//     <UserContext.Provider value={{ user, setUser }}>
+//       {children}
+//     </UserContext.Provider>
+//   );
+// }
 
-function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('light');
+// function ThemeProvider({ children }) {
+//   const [theme, setTheme] = useState('light');
 
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
+//   return (
+//     <ThemeContext.Provider value={{ theme, setTheme }}>
+//       {children}
+//     </ThemeContext.Provider>
+//   );
+// }
 
-// 在根组件中提供 Context
-function App() {
-  return (
-    <UserProvider>
-      <ThemeProvider>
-        <Page />
-      </ThemeProvider>
-    </UserProvider>
-  );
-}
+// // 在根组件中提供 Context
+// function App() {
+//   return (
+//     <UserProvider>
+//       <ThemeProvider>
+//         <Page />
+//       </ThemeProvider>
+//     </UserProvider>
+//   );
+// }
 
-// 子组件直接使用 Context
-function UserProfile() {
-  // 使用 useContext 获取 Context 值
-  const { user } = useContext(UserContext);
+// // 子组件直接使用 Context
+// function UserProfile() {
+//   // 使用 useContext 获取 Context 值
+//   const { user } = useContext(UserContext);
 
-  return (
-    <div>
-      {user ? <p>欢迎, {user.name}</p> : <p>请登录</p>}
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       {user ? <p>欢迎, {user.name}</p> : <p>请登录</p>}
+//     </div>
+//   );
+// }
 
-// 多层嵌套的组件也能直接访问 Context
-function DeepNestedComponent() {
-  const { theme } = useContext(ThemeContext);
+// // 多层嵌套的组件也能直接访问 Context
+// function DeepNestedComponent() {
+//   const { theme } = useContext(ThemeContext);
 
-  return (
-    <div className={theme === 'dark' ? 'dark' : ''}>
-      {/* 直接访问 theme，无需层层传递 */}
-    </div>
-  );
-}
+//   return (
+//     <div className={theme === 'dark' ? 'dark' : ''}>
+//       {/* 直接访问 theme，无需层层传递 */}
+//     </div>
+//   );
+// }
 
-// 使用 useContext 的简化版本
-function useTheme() {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within ThemeProvider');
-  }
-  return context;
-}
+// // 使用 useContext 的简化版本
+// function useTheme() {
+//   const context = useContext(ThemeContext);
+//   if (!context) {
+//     throw new Error('useTheme must be used within ThemeProvider');
+//   }
+//   return context;
+// }
 
-// 现在可以直接调用 Hook
-function MyComponent() {
-  const { theme, setTheme } = useTheme();
+// // 现在可以直接调用 Hook
+// function MyComponent() {
+//   const { theme, setTheme } = useTheme();
 
-  return (
-    <button onClick={() => setTheme('dark')}>
-      当前主题：{theme}
-    </button>
-  );
-}`;
+//   return (
+//     <button onClick={() => setTheme('dark')}>
+//       当前主题：{theme}
+//     </button>
+//   );
+// }`;
 
   const reducerPatternCode = `// 3. useReducer 状态机 - 管理复杂状态逻辑
 import { useReducer } from 'react';

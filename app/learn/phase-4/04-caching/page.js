@@ -59,44 +59,43 @@ export default async function HomePage() {
 //    - 每次请求都获取新数据
 //    - 适用于：用户数据、实时统计`;
 
-// revalidateCode = `// 手动重新验证缓存
-import { revalidatePath, revalidateTag } from 'next/cache';
+  const revalidateCode = `// 手动重新验证缓存
+// import { revalidatePath, revalidateTag } from 'next/cache';
 
-// 重新验证特定路径
-export async function updateProduct(id, data) {
-  // 更新数据库
-  await db.products.update({ where: { id }, data });
+// // 重新验证特定路径
+// export async function updateProduct(id, data) {
+//   // 更新数据库
+//   await db.products.update({ where: { id }, data });
 
-  // 重新验证缓存
-  revalidatePath('/products');
-  revalidatePath(\`/products/\${id}\`);
-}
+//   // 重新验证缓存
+//   revalidatePath('/products');
+//   revalidatePath(\`/products/\${id}\`);
 
-// 使用标签缓存
-export default async function ProductPage() {
-  const products = await fetch('https://api.example.com/products', {
-    next: { tags: ['products'] }
-  });
+// // 使用标签缓存
+// export default async function ProductPage() {
+//   const products = await fetch('https://api.example.com/products', {
+//     next: { tags: ['products'] }
+//   });
 
-  return <div>{/* 渲染产品 */}</div>;
-}
+//   return <div>{/* 渲染产品 */}</div>;
+// }
 
-// 更新时清理标签
-export async function createProduct(data) {
-  await db.products.create({ data });
+// // 更新时清理标签
+// export async function createProduct(data) {
+//   await db.products.create({ data });
 
-  // 清理 products 标签的所有缓存
-  revalidateTag('products');
-}
+//   // 清理 products 标签的所有缓存
+//   revalidateTag('products');
+// }
 
-// 自动重新验证
-export async function ScheduledUpdate() {
-  const data = await fetch('https://api.example.com/data', {
-    next: { revalidate: 3600 } // 1 小时自动更新
-  });
+// // 自动重新验证
+// export async function ScheduledUpdate() {
+//   const data = await fetch('https://api.example.com/data', {
+//     next: { revalidate: 3600 } // 1 小时自动更新
+//   });
 
-  return <div>{/* 渲染数据 */}</div>;
-}`;
+//   return <div>{/* 渲染数据 */}</div>;
+// }`;
 
   const routeCacheCode = `// 路由缓存 (Router Cache)
 // 自动缓存已访问的页面，提升导航速度
@@ -379,12 +378,12 @@ export default async function GoodExample() {
               <tr className="border-b border-blue-200 dark:border-blue-800">
                 <td className="py-2">博客文章</td>
                 <td className="py-2">定期重新验证</td>
-                <td className="py-2">next: { revalidate: 3600 }</td>
+                <td className="py-2">next: {'{ revalidate: 3600 }'}</td>
               </tr>
               <tr className="border-b border-blue-200 dark:border-blue-800">
                 <td className="py-2">产品列表</td>
                 <td className="py-2">定期重新验证</td>
-                <td className="py-2">next: { revalidate: 300 }</td>
+                <td className="py-2">next: {'{ revalidate: 300 }'}</td>
               </tr>
               <tr>
                 <td className="py-2">用户数据</td>

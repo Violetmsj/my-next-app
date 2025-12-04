@@ -97,139 +97,138 @@ useLayoutEffect(() => {
 
 // ⚠️ 重要区别：
 // useEffect: 不会阻塞浏览器绘制，性能更好
-// useLayoutEffect: 会阻塞浏览器绘制，确保 DOM 测量准确性`;
+// useLayoutEffect: 会阻塞浏览器绘制，确保 DOM 测量准确性
 
 // DOM 测量示例
-const DomMeasurement = () => {
-  const [size, setSize] = useState({ width: 0, height: 0 });
-  const elementRef = useRef(null);
-
-  useLayoutEffect(() => {
-    // 在 DOM 更新后立即测量
-    const element = elementRef.current;
-    if (element) {
-      const rect = element.getBoundingClientRect();
-      setSize({
-        width: Math.round(rect.width),
-        height: Math.round(rect.height)
-      });
-    }
-  }, [/* 依赖数组 */]);
-
-  return (
-    <div>
-      <div ref={elementRef} style={{ padding: '20px' }}>
-        测量这个元素
-      </div>
-      <p>元素尺寸: {size.width} x {size.height}</p>
-    </div>
-  );
-};
+// const DomMeasurement = () => {
+//   const [size, setSize] = useState({ width: 0, height: 0 });
+//   const elementRef = useRef(null);
+//
+//   useLayoutEffect(() => {
+//     // 在 DOM 更新后立即测量
+//     const element = elementRef.current;
+//     if (element) {
+//       const rect = element.getBoundingClientRect();
+//       setSize({
+//         width: Math.round(rect.width),
+//         height: Math.round(rect.height)
+//       });
+//     }
+//   }, [/* 依赖数组 */]);
+//
+//   return (
+//     <div>
+//       <div ref={elementRef} style={{ padding: '20px' }}>
+//         测量这个元素
+//       </div>
+//       <p>元素尺寸: {size.width} x {size.height}</p>
+//     </div>
+//   );
+// };
 
 // 滚动同步示例
-const ScrollSync = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const headerRef = useRef(null);
-
-  useLayoutEffect(() => {
-    const handleScroll = () => {
-      // 同步读取滚动位置
-      const y = window.scrollY;
-      setScrollY(y);
-
-      // 同步更新 header 位置（无闪烁）
-      if (headerRef.current) {
-        headerRef.current.style.transform = \`translateY(\${Math.min(y, 100)}px)\`;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <div>
-      <div ref={headerRef} style={{ position: 'sticky', top: 0 }}>
-        滚动位置: {scrollY}px
-      </div>
-      <div style={{ height: '2000px' }}></div>
-    </div>
-  );
-};`;
+// const ScrollSync = () => {
+//   const [scrollY, setScrollY] = useState(0);
+//   const headerRef = useRef(null);
+//
+//   useLayoutEffect(() => {
+//     const handleScroll = () => {
+//       // 同步读取滚动位置
+//       const y = window.scrollY;
+//       setScrollY(y);
+//
+//       // 同步更新 header 位置（无闪烁）
+//       if (headerRef.current) {
+//         headerRef.current.style.transform = \\\`translateY(\\\${Math.min(y, 100)}px)\\\`;
+//       }
+//     };
+//
+//     window.addEventListener('scroll', handleScroll, { passive: true });
+//     return () => window.removeEventListener('scroll', handleScroll);
+//   }, []);
+//
+//   return (
+//     <div>
+//       <div ref={headerRef} style={{ position: 'sticky', top: 0 }}>
+//         滚动位置: {scrollY}px
+//       </div>
+//       <div style={{ height: '2000px' }}></div>
+//     </div>
+//   );
+// };`;
 
   const resizeObserverCode = `// ResizeObserver API 示例
-import { useLayoutEffect, useRef, useState } from 'react';
+// import { useLayoutEffect, useRef, useState } from 'react';
 
-const ResponsiveComponent = () => {
-  const containerRef = useRef(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+// const ResponsiveComponent = () => {
+//   const containerRef = useRef(null);
+//   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-  useLayoutEffect(() => {
-    const element = containerRef.current;
-    if (!element) return;
+//   useLayoutEffect(() => {
+//     const element = containerRef.current;
+//     if (!element) return;
 
-    // 创建 ResizeObserver
-    const observer = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        const { width, height } = entry.contentRect;
-        setDimensions({
-          width: Math.round(width),
-          height: Math.round(height)
-        });
-      }
-    });
+//     // 创建 ResizeObserver
+//     const observer = new ResizeObserver(entries => {
+//       for (let entry of entries) {
+//         const { width, height } = entry.contentRect;
+//         setDimensions({
+//           width: Math.round(width),
+//           height: Math.round(height)
+//         });
+//       }
+//     });
 
-    // 开始观察
-    observer.observe(element);
+//     // 开始观察
+//     observer.observe(element);
 
-    return () => {
-      // 清理 observer
-      observer.disconnect();
-    };
-  }, []);
+//     return () => {
+//       // 清理 observer
+//       observer.disconnect();
+//     };
+//   }, []);
 
-  return (
-    <div
-      ref={containerRef}
-      style={{ border: '2px solid #0070f3', padding: '20px' }}
-    >
-      <p>容器尺寸: {dimensions.width} x {dimensions.height} px</p>
-      <p>调整浏览器窗口大小查看变化</p>
-    </div>
-  );
-};
+//   return (
+//     <div
+//       ref={containerRef}
+//       style={{ border: '2px solid #0070f3', padding: '20px' }}
+//     >
+//       <p>容器尺寸: {dimensions.width} x {dimensions.height} px</p>
+//       <p>调整浏览器窗口大小查看变化</p>
+//     </div>
+//   );
+// };
 
-// 自动调整 textarea 高度
-const AutoResizeTextarea = () => {
-  const textareaRef = useRef(null);
-  const [value, setValue] = useState('');
+// // 自动调整 textarea 高度
+// const AutoResizeTextarea = () => {
+//   const textareaRef = useRef(null);
+//   const [value, setValue] = useState('');
 
-  useLayoutEffect(() => {
-    const textarea = textareaRef.current;
-    if (textarea) {
-      // 自动调整高度
-      textarea.style.height = 'auto';
-      textarea.style.height = textarea.scrollHeight + 'px';
-    }
-  }, [value]);
+//   useLayoutEffect(() => {
+//     const textarea = textareaRef.current;
+//     if (textarea) {
+//       // 自动调整高度
+//       textarea.style.height = 'auto';
+//       textarea.style.height = textarea.scrollHeight + 'px';
+//     }
+//   }, [value]);
 
-  return (
-    <textarea
-      ref={textareaRef}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      placeholder="自动调整高度的输入框"
-      style={{
-        width: '100%',
-        minHeight: '40px',
-        padding: '10px',
-        resize: 'none',
-        overflow: 'hidden'
-      }}
-    />
-  );
-};`;
-
+//   return (
+//     <textarea
+//       ref={textareaRef}
+//       value={value}
+//       onChange={(e) => setValue(e.target.value)}
+//       placeholder="自动调整高度的输入框"
+//       style={{
+//         width: '100%',
+//         minHeight: '40px',
+//         padding: '10px',
+//         resize: 'none',
+//         overflow: 'hidden'
+//       }}
+//     />
+//   );
+// };`;
   const scrollPositionCode = `// 滚动位置管理
 import { useLayoutEffect, useRef } from 'react';
 
@@ -437,7 +436,7 @@ const StickyFollower = () => {
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             📏 DOM 元素测量实例
           </h2>
-          <CodeBlock code={domMeasurementCode} language="javascript" />
+          <CodeBlock code={layoutEffectCode} language="javascript" />
         </div>
 
         {/* ResizeObserver */}

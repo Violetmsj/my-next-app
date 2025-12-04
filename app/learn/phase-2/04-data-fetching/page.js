@@ -264,7 +264,7 @@ export default async function ProductPage({ params }) {
           </h3>
           <ul className="text-sm text-blue-800 dark:text-blue-400 space-y-2">
             <li>✓ 优先使用 Server Components（性能更好）</li>
-            <li>✓ 静态内容使用 <code>next: { revalidate: ... }</code> 缓存</li>
+            <li>✓ 静态内容使用 <code>next: {'{ revalidate: ... }'}</code> 缓存</li>
             <li>✓ 实时数据使用 <code>cache: 'no-store'</code></li>
             <li>✓ 使用 <code>Promise.all</code> 并行获取多个数据源</li>
             <li>✓ Client Components 中添加加载和错误状态</li>

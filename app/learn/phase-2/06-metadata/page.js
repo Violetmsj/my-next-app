@@ -173,65 +173,65 @@ public/
 ├── safari-pinned-tab.svg    # Safari 固定标签页图标
 └── site.webmanifest         # Web App 清单文件`;
 
-// robotsCode = `// robots.txt 和站点地图
-import type { Metadata } from 'next';
+const robotsCode = `// robots.txt 和站点地图
+// import type { Metadata } from 'next';
 
-// robots 指令
-export const metadata: Metadata = {
-  robots: {
-    index: true,              // 允许索引
-    follow: true,             // 允许跟踪链接
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-};
+// // robots 指令
+// export const metadata: Metadata = {
+//   robots: {
+//     index: true,              // 允许索引
+//     follow: true,             // 允许跟踪链接
+//     googleBot: {
+//       index: true,
+//       follow: true,
+//       'max-video-preview': -1,
+//       'max-image-preview': 'large',
+//       'max-snippet': -1,
+//     },
+//   },
+// };
 
-// robots.ts 文件 - 生成 robots.txt
-import type { MetadataRoute } from 'next';
+// // robots.ts 文件 - 生成 robots.txt
+// import type { MetadataRoute } from 'next';
 
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: '/admin/',
-      },
-    ],
-    sitemap: 'https://example.com/sitemap.xml',
-  };
-}
+// export default function robots(): MetadataRoute.Robots {
+//   return {
+//     rules: [
+//       {
+//         userAgent: '*',
+//         allow: '/',
+//         disallow: '/admin/',
+//       },
+//     ],
+//     sitemap: 'https://example.com/sitemap.xml',
+//   };
+// }
 
-// sitemap.ts 文件 - 生成站点地图
-import type { MetadataRoute } from 'next';
+// // sitemap.ts 文件 - 生成站点地图
+// import type { MetadataRoute } from 'next';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: 'https://example.com',
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 1,
-    },
-    {
-      url: 'https://example.com/blog',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: 'https://example.com/blog/[slug]',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-  ];
-}`;
+// export default function sitemap(): MetadataRoute.Sitemap {
+//   return [
+//     {
+//       url: 'https://example.com',
+//       lastModified: new Date(),
+//       changeFrequency: 'yearly',
+//       priority: 1,
+//     },
+//     {
+//       url: 'https://example.com/blog',
+//       lastModified: new Date(),
+//       changeFrequency: 'weekly',
+//       priority: 0.8,
+//     },
+//     {
+//       url: 'https://example.com/blog/[slug]',
+//       lastModified: new Date(),
+//       changeFrequency: 'weekly',
+//       priority: 0.7,
+//     },
+//   ];
+// }`;
 
   const layoutMetadataCode = `// Layout 中的共享 metadata
 // app/layout.tsx - 根布局
